@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   tests:
-    # «Раннер» — создание изолированного окружения с последней версией Ubuntu 
     runs-on: ubuntu-latest
 
     steps:
@@ -16,7 +15,6 @@ jobs:
       # для развёртывания окружения Python
       uses: actions/setup-python@v2
       with:
-        # Выбор версии Python
         python-version: 3.7
 
     - name: Install dependencies
@@ -90,4 +88,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ github.workflow }} успешно выполнен!
+        message: ${{ github.workflow }} успешно выполнен
