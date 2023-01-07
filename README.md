@@ -75,13 +75,7 @@ git clone git@github.com:levlm/yamdb_final.git
 sudo apt install docker.io
 ```
 
-#### Установите docker-compose на сервер(https://github.com/docker/compose/releases)
-
-```
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.6.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-sudo chmod +x /usr/local/bin/docker-compose
-```
+#### Установите docker-compose на сервер(https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 
 #### Скопируйте файлы docker-compose.yaml и nginx/default.conf из проекта на сервер
 
@@ -116,25 +110,25 @@ TELEGRAM_TOKEN=<токен вашего бота>
 #### Собрать статические файлы в STATIC_ROOT
 
 ```
-docker-compose exec web python3 manage.py collectstatic --noinput
+sudo docker compose exec web python3 manage.py collectstatic --noinput
 ```
 
 #### Применить миграции
 
 ```
-docker-compose exec web python3 manage.py migrate --noinput
+sudo docker compose exec web python3 manage.py migrate --noinput
 ```
 
 #### Заполнить базу данных
 
 ```
-docker-compose exec web python3 manage.py loaddata fixtures.json
+sudo docker compose exec web python3 manage.py loaddata fixtures.json
 ```
 
 #### Создать суперпользователя Django
 
 ```
-docker-compose exec web python manage.py createsuperuser
+sudo docker compose exec web python manage.py createsuperuser
 ```
 
 #### Проект будет доступен по адресу
