@@ -61,7 +61,7 @@ API YaMDb позволяет работать со следующими сущн
 
 ## Как запустить проект
 
-### Клонировать репозиторий и перейти в него в командной строке
+### Клонировать репозиторий
 
 ```
 git clone git@github.com:levlm/yamdb_final.git
@@ -69,43 +69,22 @@ git clone git@github.com:levlm/yamdb_final.git
 
 #### Выполните вход на свой удаленный сервер
 
-#### Установите docker на сервер
-
-```
-sudo apt install docker.io
-```
+#### Установите docker на сервер(https://docs.docker.com/get-docker/)
 
 #### Установите docker-compose на сервер(https://docs.docker.com/compose/install/linux/#install-using-the-repository)
 
-#### Скопируйте файлы docker-compose.yaml и nginx/default.conf из проекта на сервер
+
+### Шаблон наполнения env-файла (виртуальное окружение):
+
+Данные внести в файл ".env", поместить его в папке Infra (где находится файл docker-compose.yaml)
+Перечень переменных и дефолтных значений размещен в файле
 
 ```
-scp docker-compose.yaml <username>@<host>:/home/<username>/docker-compose.yaml
-
-scp -r nginx <username>@<host>:/home/<username>/
+.env.sample
 ```
 
-#### Добавьте в Secrets GitHub переменные окружения для работы
 
-```
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-POSTGRES_USER=admin
-POSTGRES_PASSWORD=ghbdtn11
-DB_HOST=db
-DB_PORT=5432
-
-DOCKER_PASSWORD=<Docker password>
-DOCKER_USERNAME=<Docker username>
-USER=<username для подключения к серверу>
-HOST=<IP сервера>
-PASSPHRASE=<пароль для сервера, если он установлен>
-SSH_KEY=<ваш SSH ключ(получить его на локальном компьютере: cat ~/.ssh/id_rsa)>
-TG_CHAT_ID=<ID чата, в который придет сообщение>
-TELEGRAM_TOKEN=<токен вашего бота>
-```
-
-#### Запушить на Github. После успешного деплоя зайдите на боевой сервер и выполните команды
+### Запускаем на сервере через docker-compose 
 
 #### Собрать статические файлы в STATIC_ROOT
 
@@ -131,6 +110,7 @@ sudo docker compose exec web python3 manage.py loaddata fixtures.json
 sudo docker compose exec web python manage.py createsuperuser
 ```
 
+
 #### Проект будет доступен по адресу
 
 ```
@@ -150,19 +130,3 @@ http://158.160.43.47/redoc/
 ```
 https://hub.docker.com/repository/docker/levlm/api_yamdb
 ```
-
-#### Переменные окружения
-
-Для подключения и выполненя запросов к базе данных PostgreSQL необходимо создать и заполнить файл ".env" с переменными окружения в папке "./infra/".
-
-Шаблон для заполнения файла ".env":
-```
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-POSTGRES_USER=admin
-POSTGRES_PASSWORD=ghbdtn11
-DB_HOST=db
-DB_PORT=5432
-```
-
-#### Directed by [Lisus Lev](https://github.com/LevLM)
